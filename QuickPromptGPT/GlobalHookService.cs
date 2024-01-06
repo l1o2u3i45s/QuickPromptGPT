@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows;
 namespace QuickPromptGPT
 {
 
@@ -47,6 +47,28 @@ namespace QuickPromptGPT
                 {
                     //Console.WriteLine("a");
                     // Ctrl + G was pressed
+
+                    var tmpClipboard = System.Windows.Clipboard.GetDataObject();
+
+                    System.Windows.Clipboard.Clear();
+
+                    // I think a small delay will be more safe.
+                    // You could remove it, but be careful.
+
+                    // Send Ctrl+C, which is "copy"
+                   SendKeys.SendWait("^c");
+
+                    // Same as above. But this is more important.
+                    // In some softwares like Word, the mouse double click will not select the word you clicked immediately.
+                    // If you remove it, you will not get the text you selected.
+
+                    if (System.Windows.Clipboard.ContainsText())
+                    {
+                        string text = System.Windows.Clipboard.GetText();
+
+                        // Your code
+
+                    }
                 }
             }
 

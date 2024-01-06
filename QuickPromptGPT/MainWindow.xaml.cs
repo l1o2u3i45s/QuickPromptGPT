@@ -23,7 +23,8 @@ namespace QuickPromptGPT
         public MainWindow()
         {
             InitializeComponent();
-
+            GlobalHookService a = new GlobalHookService();
+            a.SetHook();
         }
     }
 }
