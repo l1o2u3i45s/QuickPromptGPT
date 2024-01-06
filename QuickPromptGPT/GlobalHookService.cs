@@ -18,13 +18,20 @@ namespace QuickPromptGPT
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
-        public static void SetHook()
+        private Dictionary<Keys, Action> _keyActions = new Dictionary<Keys, Action>();
+
+        public GlobalHookService()
+        {
+            _keyActions.Add(Keys.G, () => Console.WriteLine("a"));
+        }
+
+        public void SetHook()
         {
             _hookID = SetWindowsHookEx(WH_KEYBOARD_LL, _proc,
                 GetModuleHandle(null), 0);
         }
 
-        public static void ReleaseHook()
+        public void ReleaseHook()
         {
             UnhookWindowsHookEx(_hookID);
         }

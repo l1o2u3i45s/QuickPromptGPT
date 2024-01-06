@@ -24,7 +24,6 @@ namespace QuickPromptGPT
         {
             InitializeComponent();
 
-            GlobalHookService.SetHook();
         }
     }
 }
