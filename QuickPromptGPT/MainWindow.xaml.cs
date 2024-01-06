@@ -20,11 +20,10 @@ namespace QuickPromptGPT
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
-            GlobalHookService a = new GlobalHookService();
-            a.SetHook();
+            DataContext = viewModel;
         }
     }
 }

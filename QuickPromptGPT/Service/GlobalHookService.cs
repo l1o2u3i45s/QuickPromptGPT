@@ -9,8 +9,7 @@ using System.Windows;
 namespace QuickPromptGPT
 {
 
-
-
+    public delegate Task SnippetStringCallback(string copyString);
     public class GlobalHookService
     {
         private const int WH_KEYBOARD_LL = 13;
@@ -18,11 +17,17 @@ namespace QuickPromptGPT
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
-        private Dictionary<Keys, Action> _keyActions = new Dictionary<Keys, Action>();
+        private static Dictionary<Keys, SnippetStringCallback> _keyActions = new Dictionary<Keys, SnippetStringCallback>();
+        private static List<Keys> _pressedKeys = new List<Keys>();
 
         public GlobalHookService()
         {
-            _keyActions.Add(Keys.G, () => Console.WriteLine("a"));
+        }
+
+        public void AddKeyAction(Keys key, SnippetStringCallback action)
+        {
+            _keyActions.Add(key, action);
+            _pressedKeys.Add(key);
         }
 
         public void SetHook()
@@ -43,10 +48,20 @@ namespace QuickPromptGPT
             if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
             {
                 int vkCode = Marshal.ReadInt32(lParam);
-                if ((Control.ModifierKeys & Keys.Control) != 0 && vkCode == (int)Keys.G)
+
+                bool isPressedControl = (Control.ModifierKeys & Keys.Control) != 0;
+                if (isPressedControl && vkCode == (int)Keys.G)
                 {
-                    //Console.WriteLine("a");
-                    // Ctrl + G was pressed
+
+                    Keys currentPressKey = Keys.A;
+
+                    foreach (var key in _pressedKeys)
+                    {
+                        if (vkCode == (int)key)
+                        {
+                            currentPressKey = key;
+                        }
+                    }
 
                     var tmpClipboard = System.Windows.Clipboard.GetDataObject();
 
@@ -56,7 +71,7 @@ namespace QuickPromptGPT
                     // You could remove it, but be careful.
 
                     // Send Ctrl+C, which is "copy"
-                   SendKeys.SendWait("^c");
+                    SendKeys.SendWait("^c");
 
                     // Same as above. But this is more important.
                     // In some softwares like Word, the mouse double click will not select the word you clicked immediately.
@@ -65,8 +80,7 @@ namespace QuickPromptGPT
                     if (System.Windows.Clipboard.ContainsText())
                     {
                         string text = System.Windows.Clipboard.GetText();
-
-                        // Your code
+                        _keyActions[currentPressKey]?.Invoke(text);
 
                     }
                 }
