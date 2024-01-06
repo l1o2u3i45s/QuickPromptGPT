@@ -51,20 +51,20 @@ namespace QuickPromptGPT
                 int vkCode = Marshal.ReadInt32(lParam);
 
                 bool isPressedControl = (Control.ModifierKeys & Keys.Control) != 0;
-                if (isPressedControl)
+
+                bool foundKey = false;
+                Keys currentPressKey = Keys.A;
+
+                foreach (var key in _pressedKeys)
                 {
-
-                    Keys currentPressKey = Keys.A;
-
-                    foreach (var key in _pressedKeys)
+                    if (vkCode == (int)key)
                     {
-                        if (vkCode == (int)key)
-                        {
-                            currentPressKey = key;
-                        }
+                        currentPressKey = key;
+                        foundKey = true;
                     }
-
-
+                }
+                if (isPressedControl && foundKey)
+                {
                     System.Windows.Clipboard.Clear();
 
                     // I think a small delay will be more safe.

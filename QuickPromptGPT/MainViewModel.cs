@@ -53,7 +53,7 @@ namespace QuickPromptGPT
             var answer = await _gptService.Send(copyMessage);
 
 
-            MessageBox.Show(string.Join("\n", answer));
+            MessageBox.Show(string.Join("", answer));
         }
 
         private async Task ReleaseAction()
