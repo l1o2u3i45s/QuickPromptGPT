@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
@@ -50,7 +51,7 @@ namespace QuickPromptGPT
                 int vkCode = Marshal.ReadInt32(lParam);
 
                 bool isPressedControl = (Control.ModifierKeys & Keys.Control) != 0;
-                if (isPressedControl && vkCode == (int)Keys.G)
+                if (isPressedControl)
                 {
 
                     Keys currentPressKey = Keys.A;
@@ -63,24 +64,28 @@ namespace QuickPromptGPT
                         }
                     }
 
-                    var tmpClipboard = System.Windows.Clipboard.GetDataObject();
 
                     System.Windows.Clipboard.Clear();
 
                     // I think a small delay will be more safe.
                     // You could remove it, but be careful.
+                    Thread.Sleep(50);
 
                     // Send Ctrl+C, which is "copy"
                     SendKeys.SendWait("^c");
 
+
+                    Thread.Sleep(50);
                     // Same as above. But this is more important.
                     // In some softwares like Word, the mouse double click will not select the word you clicked immediately.
-                    // If you remove it, you will not get the text you selected.
+                    // If you remove it, cyou will not get the text you selected.
 
                     if (System.Windows.Clipboard.ContainsText())
                     {
                         string text = System.Windows.Clipboard.GetText();
-                        _keyActions[currentPressKey]?.Invoke(text);
+
+                        if(_keyActions.ContainsKey(currentPressKey))
+                            _keyActions[currentPressKey]?.Invoke(text);
 
                     }
                 }
