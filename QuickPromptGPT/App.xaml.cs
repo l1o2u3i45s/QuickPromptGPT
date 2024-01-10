@@ -8,6 +8,8 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using OpenAI_API;
 using QuickPromptGPT.Service;
+using QuickPromptGPT.ViewModel;
+using QuickPromptGPT.Windows;
 
 namespace QuickPromptGPT
 {
@@ -29,8 +31,9 @@ namespace QuickPromptGPT
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
-
             services.AddSingleton<MainViewModel>();
+            services.AddTransient<GPTChatWindow>();
+            services.AddTransient<GPTChatWindowViewModel>();
 
             services.AddSingleton<OpenAIAPI>();
             services.AddSingleton<GPTService>();
