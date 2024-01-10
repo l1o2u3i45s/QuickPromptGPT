@@ -36,7 +36,7 @@ namespace QuickPromptGPT
             services.AddTransient<GPTChatWindowViewModel>();
 
             services.AddSingleton<OpenAIAPI>();
-            services.AddSingleton<GPTService>();
+            services.AddSingleton<IGPTService,GPTService>();
             services.AddSingleton<GlobalHookService>();
         }
 

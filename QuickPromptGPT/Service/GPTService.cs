@@ -9,7 +9,14 @@ using OpenAI_API.Chat;
 
 namespace QuickPromptGPT.Service
 {
-    public class GPTService
+    public interface IGPTService
+    {
+        Task Init(string tokenkey);
+
+        Task<List<string>> Send(string message);
+    }
+
+    public class GPTService : IGPTService
     {
 
         private readonly OpenAIAPI _openAiapi;
