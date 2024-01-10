@@ -8,6 +8,8 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using QuickPromptGPT.Service;
+using QuickPromptGPT.ViewModel;
+using QuickPromptGPT.Windows;
 
 namespace QuickPromptGPT
 {
@@ -16,6 +18,9 @@ namespace QuickPromptGPT
 
         private readonly GlobalHookService _globalHookService;
         private readonly GPTService _gptService;
+
+        private readonly GPTChatWindow _gptChatWindow;
+        private readonly GPTChatWindowViewModel _gptChatWindowViewModel;
 
 
         private string _tokenKey = "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";
@@ -29,7 +34,8 @@ namespace QuickPromptGPT
         public ICommand ApplyCommand => new AsyncRelayCommand(ApplyAction);
         public ICommand ReleaseCommand => new AsyncRelayCommand(ReleaseAction);
 
-        public MainViewModel(GlobalHookService globalHookService, GPTService gptService)
+        public MainViewModel(GlobalHookService globalHookService, GPTService gptService,
+            GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel)
         {
             _globalHookService = globalHookService;
             _gptService = gptService;
@@ -39,6 +45,9 @@ namespace QuickPromptGPT
 
             _ = _gptService.Init(_tokenKey);
             _ = _gptService.CreateConversation();
+
+            _gptChatWindow = gptChatWindow;
+            _gptChatWindowViewModel = gptChatWindowViewModel;
         }
 
 
@@ -50,10 +59,9 @@ namespace QuickPromptGPT
         private async Task TriggerGPT(string copyMessage)
         {
 
-            var answer = await _gptService.Send(copyMessage);
-
-
-            MessageBox.Show(string.Join("", answer));
+            _gptChatWindowViewModel.CurrentMessage.TextContent = copyMessage;
+            await _gptChatWindowViewModel.SendGPT();
+            _gptChatWindow.ShowDialog();
         }
 
         private async Task ReleaseAction()
