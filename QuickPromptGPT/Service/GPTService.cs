@@ -13,7 +13,7 @@ namespace QuickPromptGPT.Service
     {
         Task Init(string tokenkey);
 
-        Task<string> Send(string message);
+        IAsyncEnumerable<string> Send(string message);
 
         Task CreateConversation();
     }
@@ -35,25 +35,16 @@ namespace QuickPromptGPT.Service
             _openAiapi.Auth = tokenkey;
         }
 
-        public async Task<string> Send(string message)
+        public async IAsyncEnumerable<string> Send(string message)
         {
             ChatMessage chat = new ChatMessage();
             chat.TextContent = message;
             _currentConversation.AppendMessage(chat);
 
-            string response = string.Empty;
-
             await foreach (var res in _currentConversation.StreamResponseEnumerableFromChatbotAsync())
             {
-
+                yield return res;
             }
-
-            //await _currentConversation.StreamResponseFromChatbotAsync(res =>
-            //{
-            //    response += res;
-            //});
-
-            return response;
         }
 
         public async Task CreateConversation()

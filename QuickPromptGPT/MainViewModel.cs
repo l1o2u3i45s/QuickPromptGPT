@@ -61,14 +61,12 @@ namespace QuickPromptGPT
         {
 
             _gptChatWindowViewModel.CurrentMessage.TextContent = copyMessage;
-            await _gptChatWindowViewModel.SendGPT();
-
 
             _gptChatWindow.Topmost = true;
             _gptChatWindow.Show();
             _gptChatWindow.Activate();
 
-
+            await _gptChatWindowViewModel.SendGPT();
         }
 
         private async Task ReleaseAction()
