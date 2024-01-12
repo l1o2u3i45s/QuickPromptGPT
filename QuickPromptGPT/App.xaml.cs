@@ -35,9 +35,10 @@ namespace QuickPromptGPT
             services.AddTransient<GPTChatWindow>();
             services.AddTransient<GPTChatWindowViewModel>();
 
-            services.AddSingleton<OpenAIAPI>();
-            services.AddSingleton<IGPTService,GPTService>();
+            services.AddSingleton<IOpenAIAPI, OpenAIAPI>();
             services.AddSingleton<GlobalHookService>();
+            services.AddSingleton<IGPTService, GPTService>();
+
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

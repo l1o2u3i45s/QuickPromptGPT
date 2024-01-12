@@ -17,7 +17,7 @@ namespace QuickPromptGPT
     {
 
         private readonly GlobalHookService _globalHookService;
-        private readonly GPTService _gptService;
+        private readonly IGPTService _gptService;
 
         private readonly GPTChatWindow _gptChatWindow;
         private readonly GPTChatWindowViewModel _gptChatWindowViewModel;
@@ -34,7 +34,7 @@ namespace QuickPromptGPT
         public ICommand ApplyCommand => new AsyncRelayCommand(ApplyAction);
         public ICommand ReleaseCommand => new AsyncRelayCommand(ReleaseAction);
 
-        public MainViewModel(GlobalHookService globalHookService, GPTService gptService,
+        public MainViewModel(GlobalHookService globalHookService, IGPTService gptService,
             GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel)
         {
             _globalHookService = globalHookService;

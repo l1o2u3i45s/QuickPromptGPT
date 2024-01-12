@@ -14,16 +14,18 @@ namespace QuickPromptGPT.Service
         Task Init(string tokenkey);
 
         Task<List<string>> Send(string message);
+
+        Task CreateConversation();
     }
 
     public class GPTService : IGPTService
     {
 
-        private readonly OpenAIAPI _openAiapi;
+        private readonly IOpenAIAPI _openAiapi;
 
         private Conversation _currentConversation;
 
-        public GPTService(OpenAIAPI openAiapi)
+        public GPTService(IOpenAIAPI openAiapi)
         {
             _openAiapi = openAiapi;
         }
