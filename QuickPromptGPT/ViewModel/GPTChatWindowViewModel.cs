@@ -26,10 +26,16 @@ namespace QuickPromptGPT.ViewModel
 
         private ChatMessage _currentMessage = new ChatMessage();
 
-        public ChatMessage CurrentMessage
+        private string _currentMessageInput;
+
+        public string CurrentMessageInput
         {
-            get => _currentMessage;
-            set => SetProperty(ref _currentMessage, value);
+            get => _currentMessageInput;
+            set
+            {
+                SetProperty(ref _currentMessageInput, value);
+                _currentMessage.TextContent = value;
+            }
         }
 
 
@@ -45,11 +51,11 @@ namespace QuickPromptGPT.ViewModel
         public async Task SendGPT()
         {
             ChatMessage message = _currentMessage;
-           var response = await _gptService.Send(message.TextContent);
+            var response = await _gptService.Send(message.TextContent);
 
 
-           ChatMessage responseMessage = new ChatMessage();
-          // responseMessage.TextContent = response;
+            ChatMessage responseMessage = new ChatMessage();
+            // responseMessage.TextContent = response;
 
         }
 

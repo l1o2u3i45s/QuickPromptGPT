@@ -59,9 +59,10 @@ namespace QuickPromptGPT
         private async Task TriggerGPT(string copyMessage)
         {
 
-            _gptChatWindowViewModel.CurrentMessage.TextContent = copyMessage;
-            await _gptChatWindowViewModel.SendGPT();
+            _gptChatWindowViewModel.CurrentMessageInput = copyMessage;
             _gptChatWindow.ShowDialog();
+            //await _gptChatWindowViewModel.SendGPT();
+
         }
 
         private async Task ReleaseAction()
