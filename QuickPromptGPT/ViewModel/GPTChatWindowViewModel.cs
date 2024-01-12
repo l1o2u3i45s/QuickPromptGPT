@@ -8,6 +8,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using OpenAI_API.Chat;
+using QuickPromptGPT.Model;
 using QuickPromptGPT.Service;
 
 namespace QuickPromptGPT.ViewModel
@@ -16,26 +17,20 @@ namespace QuickPromptGPT.ViewModel
     {
         private readonly IGPTService _gptService;
 
-        private ObservableCollection<ChatMessage> _chatMessages = new ObservableCollection<ChatMessage>();
+        private ObservableCollection<DisplayChatMessage> _chatMessages = new ObservableCollection<DisplayChatMessage>();
 
-        public ObservableCollection<ChatMessage> ChatMessages
+        public ObservableCollection<DisplayChatMessage> ChatMessages
         {
             get => _chatMessages;
             set => SetProperty(ref _chatMessages, value);
         }
 
-        private ChatMessage _currentMessage = new ChatMessage();
+        private DisplayChatMessage _currentMessage = new DisplayChatMessage();
 
-        private string _currentMessageInput;
-
-        public string CurrentMessageInput
+        public DisplayChatMessage CurrentMessage
         {
-            get => _currentMessageInput;
-            set
-            {
-                SetProperty(ref _currentMessageInput, value);
-                _currentMessage.TextContent = value;
-            }
+            get => _currentMessage;
+            set => SetProperty(ref _currentMessage, value);
         }
 
 
@@ -50,15 +45,12 @@ namespace QuickPromptGPT.ViewModel
 
         public async Task SendGPT()
         {
-            ChatMessage message = _currentMessage;
-            var response = await _gptService.Send(message.TextContent);
+            ChatMessages.Add(CurrentMessage);
+            CurrentMessage = new DisplayChatMessage();
 
+            var response = await _gptService.Send(_currentMessage.TextContent);
 
-            ChatMessage responseMessage = new ChatMessage();
-            // responseMessage.TextContent = response;
-
+            ChatMessages.Add(new DisplayChatMessage() { TextContent = response });
         }
-
-
     }
 }

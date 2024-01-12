@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DisplayChatMessage.cs" />
     <Compile Include="Service\GPTService.cs" />
     <Compile Include="ViewModel\GPTChatWindowViewModel.cs" />
     <Compile Include="Windows\GPTChatWindow.xaml.cs">
