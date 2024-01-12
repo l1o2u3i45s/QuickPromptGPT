@@ -50,10 +50,10 @@ namespace QuickPromptGPT.ViewModel
                 TextContent = _currentMessage.TextContent
             });
 
-            //var response = await _gptService.Send(_currentMessage.TextContent);
+            var response = await _gptService.Send(_currentMessage.TextContent);
 
 
-            var response = "aa";
+           // var response = "aa";
             ChatMessages.Add(new DisplayChatMessage() { TextContent = response });
 
             CurrentMessage.TextContent = "";

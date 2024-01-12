@@ -43,11 +43,15 @@ namespace QuickPromptGPT.Service
 
             string response = string.Empty;
 
-           
-            await _currentConversation.StreamResponseFromChatbotAsync(res =>
+            await foreach (var res in _currentConversation.StreamResponseEnumerableFromChatbotAsync())
             {
-                response += res;
-            });
+                Console.Write(res);
+            }
+
+            //await _currentConversation.StreamResponseFromChatbotAsync(res =>
+            //{
+            //    response += res;
+            //});
 
             return response;
         }
