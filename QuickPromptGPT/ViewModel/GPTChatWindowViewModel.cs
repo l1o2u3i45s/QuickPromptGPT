@@ -45,12 +45,18 @@ namespace QuickPromptGPT.ViewModel
 
         public async Task SendGPT()
         {
-            ChatMessages.Add(CurrentMessage);
-            CurrentMessage = new DisplayChatMessage();
+            ChatMessages.Add(new DisplayChatMessage()
+            {
+                TextContent = _currentMessage.TextContent
+            });
 
-            var response = await _gptService.Send(_currentMessage.TextContent);
+            //var response = await _gptService.Send(_currentMessage.TextContent);
 
+
+            var response = "aa";
             ChatMessages.Add(new DisplayChatMessage() { TextContent = response });
+
+            CurrentMessage.TextContent = "";
         }
     }
 }

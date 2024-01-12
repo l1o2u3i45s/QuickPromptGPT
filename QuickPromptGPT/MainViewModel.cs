@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -60,8 +61,13 @@ namespace QuickPromptGPT
         {
 
             _gptChatWindowViewModel.CurrentMessage.TextContent = copyMessage;
-            _gptChatWindow.ShowDialog();
-            //await _gptChatWindowViewModel.SendGPT();
+            await _gptChatWindowViewModel.SendGPT();
+
+
+            _gptChatWindow.Topmost = true;
+            _gptChatWindow.Show();
+            _gptChatWindow.Activate();
+
 
         }
 
