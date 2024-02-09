@@ -22,7 +22,7 @@ namespace QuickPromptGPT
 
         private readonly  ChatViewModel _chatViewModel;
 
-        
+        public ChatViewModel ChatViewModel => _chatViewModel;
 
 
         public MainViewModel(SettingVIewModel settingVIewModel, ChatViewModel chatViewModel)

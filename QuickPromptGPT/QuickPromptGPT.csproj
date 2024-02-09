@@ -123,6 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enums.cs" />
     <Compile Include="Model\DisplayChatMessage.cs" />
     <Compile Include="Service\GPTService.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />

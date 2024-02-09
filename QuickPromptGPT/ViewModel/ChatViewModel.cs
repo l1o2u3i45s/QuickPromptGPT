@@ -7,7 +7,24 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace QuickPromptGPT.ViewModel
 {
-    public class ChatViewModel:ObservableObject
+    public class ChatViewModel : ObservableObject
     {
+        private GPTModel _selectedModel;
+
+        public GPTModel SelectedModel
+        {
+            get => _selectedModel;
+            set => SetProperty(ref _selectedModel, value);
+        }
+
+
+
+        public ChatViewModel()
+        {
+        }
+
     }
+
+
+
 }
