@@ -32,6 +32,9 @@ namespace QuickPromptGPT
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();
+            services.AddSingleton<ChatViewModel>();
+            services.AddSingleton<SettingVIewModel>();
+
             services.AddSingleton<GPTChatWindow>();
             services.AddSingleton<GPTChatWindowViewModel>();
 

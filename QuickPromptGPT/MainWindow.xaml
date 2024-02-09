@@ -9,22 +9,33 @@
         d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         Title="MainWindow" Height="200" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="Main">
 
-        <TextBlock Text="API Key:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Margin="10" Text="{Binding TokenKey}"/>
+            </TabItem>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <Button  Margin="10" Background="DarkCyan" Content="Apply" Width="200" Height="50" Command="{Binding ApplyCommand}"></Button>
-            <Button  Margin="10" Background=" IndianRed" Content="Release" Width="200" Height="50" Command="{Binding ReleaseCommand}"></Button>
-        </StackPanel>
-      
+            <TabItem Header="Settings" DataContext="{Binding SettingViewModel}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="API Key:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Margin="10" Text="{Binding TokenKey}"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <Button  Margin="10" Background="DarkCyan" Content="Apply" Width="200" Height="50" Command="{Binding ApplyCommand}"></Button>
+                        <Button  Margin="10" Background=" IndianRed" Content="Release" Width="200" Height="50" Command="{Binding ReleaseCommand}"></Button>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

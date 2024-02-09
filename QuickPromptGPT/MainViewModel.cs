@@ -14,67 +14,22 @@ using QuickPromptGPT.Windows;
 
 namespace QuickPromptGPT
 {
-    public partial class MainViewModel : ObservableObject
+    public  class MainViewModel : ObservableObject
     {
+        private readonly SettingVIewModel _settingViewModel;
 
-        private readonly GlobalHookService _globalHookService;
-        private readonly IGPTService _gptService;
+        public SettingVIewModel SettingViewModel => _settingViewModel;
 
-        private readonly GPTChatWindow _gptChatWindow;
-        private readonly GPTChatWindowViewModel _gptChatWindowViewModel;
+        private readonly  ChatViewModel _chatViewModel;
+
+        
 
 
-        private string _tokenKey = "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";
-
-        public string TokenKey
+        public MainViewModel(SettingVIewModel settingVIewModel, ChatViewModel chatViewModel)
         {
-            get => _tokenKey; set => SetProperty(ref _tokenKey, value);
+            _settingViewModel = settingVIewModel;
+            _chatViewModel = chatViewModel;
         }
 
-
-        public ICommand ApplyCommand => new AsyncRelayCommand(ApplyAction);
-        public ICommand ReleaseCommand => new AsyncRelayCommand(ReleaseAction);
-
-        public MainViewModel(GlobalHookService globalHookService, IGPTService gptService,
-            GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel)
-        {
-            _globalHookService = globalHookService;
-            _gptService = gptService;
-
-            _globalHookService.SetHook();
-            _globalHookService.AddKeyAction(Keys.G, TriggerGPT);
-
-            _ = _gptService.Init(_tokenKey);
-            _ = _gptService.CreateConversation();
-
-            _gptChatWindow = gptChatWindow;
-            _gptChatWindowViewModel = gptChatWindowViewModel;
-        }
-
-
-        private async Task ApplyAction()
-        {
-            await _gptService.Init(_tokenKey);
-        }
-
-        private async Task TriggerGPT(string copyMessage)
-        {
-
-            _gptChatWindowViewModel.CurrentMessage.TextContent = copyMessage;
-
-            _gptChatWindow.Topmost = true;
-            _gptChatWindow.Show();
-            _gptChatWindow.Activate();
-
-            await _gptChatWindowViewModel.SendGPT();
-        }
-
-        private async Task ReleaseAction()
-        {
-            _globalHookService.ReleaseHook();
-        }
-
-
-       
     }
 }
