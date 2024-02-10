@@ -15,18 +15,36 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition/>
+                        <RowDefinition Height="200"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Model" VerticalAlignment="Center" FontSize="20"></TextBlock>
-                            <ComboBox SelectedItem="{Binding SelectedModel}" Width="200" Margin="10">
+                            <ComboBox SelectedValue="{Binding SelectedModel}" SelectedValuePath="Tag" Width="200" Margin="10">
                                 <ComboBoxItem Content="GPT-4" Tag="{x:Static local:GPTModel.GPT4}"/>
                                 <ComboBoxItem Content="GPT-3.5" Tag="{x:Static local:GPTModel.GPT3_5}"/>
                                 <ComboBoxItem Content="DALL-E" Tag="{x:Static local:GPTModel.DALL_E}"/>
                             </ComboBox>
                         </StackPanel>
 
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding ChatMessages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TextContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <Grid Grid.Row="2">
+                        <TextBox Margin="10" Text="{Binding CurrentMessage.TextContent}"></TextBox>
+
+                        <Button Content="Send" Command="{Binding SendMessageCommand}" Width="50" Height="50" 
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"></Button>
                     </Grid>
                 </Grid>
 
