@@ -126,6 +126,9 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Model\DisplayChatMessage.cs" />
     <Compile Include="Service\GPTService.cs" />
+    <Compile Include="UserControl\ChatView_UC.xaml.cs">
+      <DependentUpon>ChatView_UC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\GPTChatWindowViewModel.cs" />
     <Compile Include="ViewModel\SettingVIewModel.cs" />
@@ -146,6 +149,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControl\ChatView_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\GPTChatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
