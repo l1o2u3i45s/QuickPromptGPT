@@ -99,7 +99,7 @@ namespace QuickPromptGPT.ViewModel
 
 
             DisplayChatMessage response = new DisplayChatMessage();
-            SelectedConversation.AppendMessage(response.TextContent);
+            SelectedConversation.AppendMessage(response);
             await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
             {
                 response.TextContent += answer;

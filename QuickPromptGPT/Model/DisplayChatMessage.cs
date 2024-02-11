@@ -20,7 +20,7 @@ namespace QuickPromptGPT.Model
             set => SetProperty(ref _textContent, value);
         }
 
-       
+
         public static implicit operator ChatMessage(DisplayChatMessage displayChatMessage)
         {
             ChatMessage chatMessage = new ChatMessage();
@@ -85,6 +85,12 @@ namespace QuickPromptGPT.Model
             {
                 TextContent = message
             });
+        }
+
+        public void AppendMessage(DisplayChatMessage message)
+        {
+            _currentConversation.AppendMessage(message);
+            ChatMessages.Add(message);
         }
     }
 }
