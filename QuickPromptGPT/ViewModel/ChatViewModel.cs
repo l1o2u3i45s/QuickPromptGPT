@@ -48,34 +48,64 @@ namespace QuickPromptGPT.ViewModel
         }
 
         public ICommand SendMessageCommand { get; set; }
+        public ICommand AddConversationCommand { get; set; }
+        public ICommand DeleteConversationCommand { get; set; }
 
 
         private readonly IGPTService _gptService;
+        private readonly IConversationService _conversationService;
 
-        public ChatViewModel(IGPTService gptService)
+        public ChatViewModel(IGPTService gptService, IConversationService conversationService)
         {
             _gptService = gptService;
+            _conversationService = conversationService;
 
+            _ = InitData();
 
             SendMessageCommand = new AsyncRelayCommand(SendMessage);
+            AddConversationCommand = new AsyncRelayCommand(AddConversation);
+            DeleteConversationCommand = new AsyncRelayCommand(DeleteConversation);
         }
 
+        private async Task InitData()
+        {
+            var hisConversation = await _conversationService.GetConversations();
+            DisplayConversations = new ObservableCollection<DisplayConversation>(hisConversation);
+
+            if (DisplayConversations.Any() == false)
+            {
+                var newConversation = new DisplayConversation(await _gptService.CreateConversation(SelectedModel));
+                DisplayConversations.Add(newConversation);
+            }
+
+
+
+            SelectedConversation = DisplayConversations.FirstOrDefault();
+        }
+
+        private async Task AddConversation()
+        {
+
+        }
+
+        private async Task DeleteConversation()
+        {
+        }
 
         private async Task SendMessage()
         {
-            SelectedConversation.Messages.Add(new DisplayChatMessage()
+          
+            SelectedConversation.AppendMessage(_currentMessage.TextContent);
+
+
+            DisplayChatMessage response = new DisplayChatMessage();
+            SelectedConversation.AppendMessage(response.TextContent);
+            await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
             {
-                TextContent = _currentMessage.TextContent
-            });
-
-
-            DisplayChatMessage reponse = new DisplayChatMessage();
-
-            SelectedConversation.Messages.Add(reponse);
-            await foreach (var answer in _gptService.Send(_currentMessage.TextContent))
-            {
-                reponse.TextContent += answer;
+                response.TextContent += answer;
             }
+
+           
 
             CurrentMessage.TextContent = "";
         }

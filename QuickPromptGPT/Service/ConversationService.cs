@@ -23,6 +23,9 @@ namespace QuickPromptGPT.Service
 
         public async Task<IEnumerable<DisplayConversation>> GetConversations()
         {
+            if (File.Exists(fileName) == false)
+                return new List<DisplayConversation>();
+
             using (StreamReader r = new StreamReader(fileName))
             {
                 string json = r.ReadToEnd();

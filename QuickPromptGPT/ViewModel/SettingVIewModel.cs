@@ -41,7 +41,6 @@ namespace QuickPromptGPT.ViewModel
             _globalHookService.AddKeyAction(Keys.G, TriggerGPT);
 
             _ = _gptService.Init(_tokenKey);
-            _ = _gptService.CreateConversation();
 
             _gptChatWindow = gptChatWindow;
             _gptChatWindowViewModel = gptChatWindowViewModel;

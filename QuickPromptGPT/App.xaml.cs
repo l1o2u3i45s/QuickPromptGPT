@@ -41,6 +41,7 @@ namespace QuickPromptGPT
             services.AddSingleton<IOpenAIAPI, OpenAIAPI>();
             services.AddSingleton<GlobalHookService>();
             services.AddSingleton<IGPTService, GPTService>();
+            services.AddSingleton<IConversationService,ConversationService>();
 
         }
 

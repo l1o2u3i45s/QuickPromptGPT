@@ -24,7 +24,7 @@
 
             <Grid Grid.RowSpan="3">
                 <ListView ItemsSource="{Binding DisplayConversations,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding SelectedConversation}" DisplayMemberPath="Name">
+                          SelectedItem="{Binding SelectedConversation}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}" />
@@ -47,7 +47,7 @@
             </Grid>
 
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding SelectedConversation.Messages}">
+                <ItemsControl ItemsSource="{Binding SelectedConversation.ChatMessages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding TextContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

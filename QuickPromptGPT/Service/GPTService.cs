@@ -14,9 +14,9 @@ namespace QuickPromptGPT.Service
     {
         Task Init(string tokenkey);
 
-        IAsyncEnumerable<string> Send(string message);
+        IAsyncEnumerable<string> Send(Conversation conversation);
 
-        Task CreateConversation();
+        Task<Conversation> CreateConversation(GPTModel model);
 
     }
 
@@ -25,7 +25,6 @@ namespace QuickPromptGPT.Service
 
         private readonly IOpenAIAPI _openAiapi;
 
-        private Conversation _currentConversation;
 
         public GPTService(IOpenAIAPI openAiapi)
         {
@@ -37,22 +36,24 @@ namespace QuickPromptGPT.Service
             _openAiapi.Auth = tokenkey;
         }
 
-        public async IAsyncEnumerable<string> Send(string message)
+        public async IAsyncEnumerable<string> Send(Conversation conversation)
         {
-            ChatMessage chat = new ChatMessage();
-            chat.TextContent = message;
-            _currentConversation.AppendMessage(chat);
-
-            await foreach (var res in _currentConversation.StreamResponseEnumerableFromChatbotAsync())
+            await foreach (var res in conversation.StreamResponseEnumerableFromChatbotAsync())
             {
                 yield return res;
             }
         }
 
-        public async Task CreateConversation()
+        public async Task<Conversation> CreateConversation(GPTModel model)
         {
-            _currentConversation = _openAiapi.Chat.CreateConversation();
+            ChatRequest request = new ChatRequest()
+            {
+                Model = model.ToOpenAIModel()
+            };
+             return _openAiapi.Chat.CreateConversation(request);
         }
 
     }
+
+   
 }
