@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,11 @@ namespace QuickPromptGPT.Model
             chatMessage.TextContent = displayChatMessage.TextContent;
             return chatMessage;
         }
+    }
+
+
+    public class DisplayConversation : ObservableObject
+    {
+        public ObservableCollection<DisplayChatMessage> Messages { get; set; } = new ObservableCollection<DisplayChatMessage>();
     }
 }

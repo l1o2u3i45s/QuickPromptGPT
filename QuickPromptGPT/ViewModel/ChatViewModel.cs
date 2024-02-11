@@ -31,12 +31,20 @@ namespace QuickPromptGPT.ViewModel
             set => SetProperty(ref _currentMessage, value);
         }
 
-        private ObservableCollection<DisplayChatMessage> _chatMessages = new ObservableCollection<DisplayChatMessage>();
+        private ObservableCollection<DisplayConversation> _displayConversations = new ObservableCollection<DisplayConversation>();
 
-        public ObservableCollection<DisplayChatMessage> ChatMessages
+        public ObservableCollection<DisplayConversation> DisplayConversations
         {
-            get => _chatMessages;
-            set => SetProperty(ref _chatMessages, value);
+            get => _displayConversations;
+            set => SetProperty(ref _displayConversations, value);
+        }
+
+        private DisplayConversation _selectedConversation;
+
+        public DisplayConversation SelectedConversation
+        {
+            get => _selectedConversation;
+            set => SetProperty(ref _selectedConversation, value);
         }
 
         public ICommand SendMessageCommand { get; set; }
@@ -55,7 +63,7 @@ namespace QuickPromptGPT.ViewModel
 
         private async Task SendMessage()
         {
-            ChatMessages.Add(new DisplayChatMessage()
+            SelectedConversation.Messages.Add(new DisplayChatMessage()
             {
                 TextContent = _currentMessage.TextContent
             });
@@ -63,7 +71,7 @@ namespace QuickPromptGPT.ViewModel
 
             DisplayChatMessage reponse = new DisplayChatMessage();
 
-            ChatMessages.Add(reponse);
+            SelectedConversation.Messages.Add(reponse);
             await foreach (var answer in _gptService.Send(_currentMessage.TextContent))
             {
                 reponse.TextContent += answer;

@@ -17,8 +17,19 @@
                 <RowDefinition/>
                 <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.RowSpan="3">
+                <DataGrid ItemsSource="{Binding DisplayConversations,UpdateSourceTrigger=PropertyChanged}">
+
+                </DataGrid>
+
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Model" VerticalAlignment="Center" FontSize="20"></TextBlock>
                     <ComboBox SelectedValue="{Binding SelectedModel}" SelectedValuePath="Tag" Width="200" Margin="10">
@@ -30,8 +41,8 @@
 
             </Grid>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding ChatMessages}">
+            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding SelectedConversation.Messages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding TextContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -40,7 +51,7 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Grid.Column="1">
                 <TextBox Margin="10" Text="{Binding CurrentMessage.TextContent}"></TextBox>
 
                 <Button Content="Send" Command="{Binding SendMessageCommand}" Width="50" Height="50" 
