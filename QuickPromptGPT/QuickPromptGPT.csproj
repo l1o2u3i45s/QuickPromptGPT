@@ -125,6 +125,7 @@
     </ApplicationDefinition>
     <Compile Include="Enums.cs" />
     <Compile Include="Model\DisplayChatMessage.cs" />
+    <Compile Include="Service\ConversationService.cs" />
     <Compile Include="Service\GPTService.cs" />
     <Compile Include="UserControl\ChatView_UC.xaml.cs">
       <DependentUpon>ChatView_UC.xaml</DependentUpon>

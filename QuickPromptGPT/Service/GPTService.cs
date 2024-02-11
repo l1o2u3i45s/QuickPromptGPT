@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenAI_API;
 using OpenAI_API.Chat;
+using QuickPromptGPT.Model;
 
 namespace QuickPromptGPT.Service
 {
@@ -16,6 +17,7 @@ namespace QuickPromptGPT.Service
         IAsyncEnumerable<string> Send(string message);
 
         Task CreateConversation();
+
     }
 
     public class GPTService : IGPTService

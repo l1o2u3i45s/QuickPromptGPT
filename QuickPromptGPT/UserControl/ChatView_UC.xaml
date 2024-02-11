@@ -23,9 +23,14 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.RowSpan="3">
-                <DataGrid ItemsSource="{Binding DisplayConversations,UpdateSourceTrigger=PropertyChanged}">
-
-                </DataGrid>
+                <ListView ItemsSource="{Binding DisplayConversations,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedConversation}" DisplayMemberPath="Name">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
             </Grid>
 
