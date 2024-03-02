@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:QuickPromptGPT"
              Startup="OnStartup">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="GptChatViewBackground" Color="#212121" />
+            <SolidColorBrush x:Key="GptChatViewListBackground" Color="#171717" />
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Foreground" Value="#ececec" />
+            </Style>
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBoxBase}">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Foreground" Value="#ececec" />
+            </Style>
+
+
+        </ResourceDictionary>
+      
     </Application.Resources>
 </Application>

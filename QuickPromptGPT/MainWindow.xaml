@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         Title="MainWindow" Height="800" Width="1200" WindowState="Maximized">
-    <Grid>
+    <Grid >
         <TabControl>
             <TabItem Header="Main" >
                 <userControl:ChatView_UC DataContext="{Binding ChatViewModel}"></userControl:ChatView_UC>
