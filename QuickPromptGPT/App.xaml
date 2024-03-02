@@ -13,12 +13,12 @@
             <SolidColorBrush x:Key="GptChatViewListBackground" Color="#171717" />
             <Style TargetType="TextBlock">
                 <Setter Property="FontSize" Value="15" />
-                <Setter Property="Foreground" Value="#ececec" />
+                <Setter Property="Foreground" Value="#e0e0e0" />
             </Style>
 
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBoxBase}">
                 <Setter Property="FontSize" Value="15" />
-                <Setter Property="Foreground" Value="#ececec" />
+                <Setter Property="Foreground" Value="#e0e0e0" />
             </Style>
 
 
