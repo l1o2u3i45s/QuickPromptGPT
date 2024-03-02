@@ -45,13 +45,22 @@
             </ScrollViewer>
 
             <Grid Grid.Row="2" Grid.Column="1">
-                <TextBox Margin="10" FontSize="20" Text="{Binding CurrentMessage.TextContent,UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Margin="10" FontSize="20" Grid.ColumnSpan="2" Text="{Binding CurrentMessage.TextContent,UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
 
-                <Button Content="送出" Command="{Binding SendMessageCommand}" Width="100" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"></Button>
+                <Button Content="送出" Background="LightBlue" Command="{Binding SendMessageCommand}" Width="100" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
 
             </Grid>
         </Grid>
