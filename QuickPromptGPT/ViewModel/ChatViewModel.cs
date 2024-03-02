@@ -96,7 +96,7 @@ namespace QuickPromptGPT.ViewModel
         {
           
             SelectedConversation.AppendMessage(_currentMessage.TextContent);
-
+            CurrentMessage.TextContent = "";
 
             DisplayChatMessage response = new DisplayChatMessage();
             SelectedConversation.AppendMessage(response);
@@ -107,7 +107,7 @@ namespace QuickPromptGPT.ViewModel
 
            
 
-            CurrentMessage.TextContent = "";
+          
         }
 
     }
