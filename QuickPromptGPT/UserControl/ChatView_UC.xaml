@@ -44,8 +44,8 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <Grid Grid.Row="2" Grid.Column="1">
-                <Border BorderBrush="#e3e3e3">
+            <Grid Grid.Row="2" Grid.Column="1" Margin="10">
+                <Border BorderBrush="#e3e3e3" BorderThickness="1" CornerRadius="20" >
                     <TextBox Margin="10" FontSize="20" Grid.ColumnSpan="2" Text="{Binding CurrentMessage.TextContent,UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}"></KeyBinding>
