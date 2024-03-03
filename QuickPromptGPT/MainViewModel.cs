@@ -16,18 +16,18 @@ namespace QuickPromptGPT
 {
     public  class MainViewModel : ObservableObject
     {
-        private readonly SettingVIewModel _settingViewModel;
+        private readonly SettingViewModel _settingViewModel;
 
-        public SettingVIewModel SettingViewModel => _settingViewModel;
+        public SettingViewModel SettingViewModel => _settingViewModel;
 
         private readonly  ChatViewModel _chatViewModel;
 
         public ChatViewModel ChatViewModel => _chatViewModel;
 
 
-        public MainViewModel(SettingVIewModel settingVIewModel, ChatViewModel chatViewModel)
+        public MainViewModel(SettingViewModel settingViewModel, ChatViewModel chatViewModel)
         {
-            _settingViewModel = settingVIewModel;
+            _settingViewModel = settingViewModel;
             _chatViewModel = chatViewModel;
         }
 

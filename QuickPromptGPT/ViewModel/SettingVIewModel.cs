@@ -12,7 +12,7 @@ using QuickPromptGPT.Windows;
 
 namespace QuickPromptGPT.ViewModel
 {
-    public class SettingVIewModel : ObservableObject
+    public class SettingViewModel : ObservableObject
     {
         public ICommand ApplyCommand => new AsyncRelayCommand(ApplyAction);
         public ICommand ReleaseCommand => new AsyncRelayCommand(ReleaseAction);
@@ -31,7 +31,7 @@ namespace QuickPromptGPT.ViewModel
             get => _tokenKey; set => SetProperty(ref _tokenKey, value);
         }
 
-        public SettingVIewModel(GlobalHookService globalHookService, IGPTService gptService,
+        public SettingViewModel(GlobalHookService globalHookService, IGPTService gptService,
        GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel)
         {
             _globalHookService = globalHookService;

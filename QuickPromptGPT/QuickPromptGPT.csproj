@@ -145,7 +145,7 @@
     </Compile>
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\GPTChatWindowViewModel.cs" />
-    <Compile Include="ViewModel\SettingVIewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="Windows\GPTChatWindow.xaml.cs">
       <DependentUpon>GPTChatWindow.xaml</DependentUpon>
     </Compile>
