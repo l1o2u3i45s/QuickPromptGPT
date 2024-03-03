@@ -49,8 +49,6 @@ namespace QuickPromptGPT.ViewModel
 
         public ICommand SendMessageCommand { get; set; }
         public ICommand AddConversationCommand { get; set; }
-        public ICommand DeleteConversationCommand { get; set; }
-
 
         private readonly IGPTService _gptService;
         private readonly IConversationService _conversationService;
@@ -64,7 +62,6 @@ namespace QuickPromptGPT.ViewModel
 
             SendMessageCommand = new AsyncRelayCommand(SendMessage);
             AddConversationCommand = new AsyncRelayCommand(AddConversation);
-            DeleteConversationCommand = new AsyncRelayCommand(DeleteConversation);
         }
 
         private async Task InitData()
@@ -88,10 +85,7 @@ namespace QuickPromptGPT.ViewModel
 
         }
 
-        private async Task DeleteConversation()
-        {
-        }
-
+      
         private async Task SendMessage()
         {
           
