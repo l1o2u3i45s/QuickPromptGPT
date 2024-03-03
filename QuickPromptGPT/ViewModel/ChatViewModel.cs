@@ -72,17 +72,19 @@ namespace QuickPromptGPT.ViewModel
             if (DisplayConversations.Any() == false)
             {
                 var newConversation = new DisplayConversation(await _gptService.CreateConversation(SelectedModel));
+                newConversation.Name = "New Conversation";
                 DisplayConversations.Add(newConversation);
             }
-
-
 
             SelectedConversation = DisplayConversations.FirstOrDefault();
         }
 
         private async Task AddConversation()
         {
-
+            var newConversation = new DisplayConversation(await _gptService.CreateConversation(SelectedModel));
+            newConversation.Name = "New Conversation";
+            DisplayConversations.Add(newConversation);
+            SelectedConversation = DisplayConversations.LastOrDefault();
         }
 
       

@@ -12,7 +12,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid Background="{StaticResource GptChatViewListBackground}">
-                <Button HorizontalContentAlignment="Left" BorderBrush="Transparent"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Background="{StaticResource GptChatViewListBackground}">
+                <Button HorizontalContentAlignment="Left" BorderBrush="Transparent" 
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                        Command="{Binding AddConversationCommand}"
+                        Background="{StaticResource GptChatViewListBackground}">
                     <Button.Content>
                         <TextBlock Text="New Chat" FontSize="20" ></TextBlock>
                     </Button.Content>
