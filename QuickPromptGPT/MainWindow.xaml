@@ -18,30 +18,12 @@
                 <userControl:ChatView_UC DataContext="{Binding ChatViewModel}"></userControl:ChatView_UC>
             </TabItem>
 
-            <TabItem  DataContext="{Binding SettingViewModel}">
+            <TabItem  >
                 <TabItem.Header>
                     <TextBlock Text="Setting" Foreground="Black"></TextBlock>
                 </TabItem.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="API Key:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Margin="10" Text="{Binding TokenKey}"/>
-
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <Button  Margin="10" Background="DarkCyan" Content="Apply" Width="200" Height="50" Command="{Binding ApplyCommand}"></Button>
-                        <Button  Margin="10" Background=" IndianRed" Content="Release" Width="200" Height="50" Command="{Binding ReleaseCommand}"></Button>
-                    </StackPanel>
-
-                </Grid>
-            </TabItem>
+                <userControl:SettingView_UC DataContext="{Binding SettingViewModel}"></userControl:SettingView_UC>
+                          </TabItem>
         </TabControl>
 
     </Grid>

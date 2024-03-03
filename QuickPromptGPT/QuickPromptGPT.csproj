@@ -140,6 +140,9 @@
     <Compile Include="UserControl\ChatView_UC.xaml.cs">
       <DependentUpon>ChatView_UC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\SettingView_UC.xaml.cs">
+      <DependentUpon>SettingView_UC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\GPTChatWindowViewModel.cs" />
     <Compile Include="ViewModel\SettingVIewModel.cs" />
@@ -161,6 +164,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControl\ChatView_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\SettingView_UC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
