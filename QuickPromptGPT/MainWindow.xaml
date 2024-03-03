@@ -13,7 +13,7 @@
         <TabControl>
             <TabItem >
                 <TabItem.Header>
-                    <TextBlock Text="OpeAI" Foreground="Black"></TextBlock>
+                    <TextBlock Text="OpenAI" Foreground="Black"></TextBlock>
                 </TabItem.Header>
                 <userControl:ChatView_UC DataContext="{Binding ChatViewModel}"></userControl:ChatView_UC>
             </TabItem>

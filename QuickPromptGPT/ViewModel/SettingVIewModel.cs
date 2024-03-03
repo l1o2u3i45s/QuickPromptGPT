@@ -28,7 +28,12 @@ namespace QuickPromptGPT.ViewModel
 
         public string TokenKey
         {
-            get => _tokenKey; set => SetProperty(ref _tokenKey, value);
+            get => _tokenKey;
+            set
+            {
+                SetProperty(ref _tokenKey, value);
+                _ = ApplyAction();
+            }
         }
 
         public SettingViewModel(GlobalHookService globalHookService, IGPTService gptService,
@@ -37,9 +42,8 @@ namespace QuickPromptGPT.ViewModel
             _globalHookService = globalHookService;
             _gptService = gptService;
 
-            _globalHookService.SetHook();
-            _globalHookService.AddKeyAction(Keys.G, TriggerGPT);
 
+            _ = SetupHotKey();
             _ = _gptService.Init(_tokenKey);
 
             _gptChatWindow = gptChatWindow;
@@ -53,6 +57,12 @@ namespace QuickPromptGPT.ViewModel
         private async Task ReleaseAction()
         {
             _globalHookService.ReleaseHook();
+        }
+
+        private async Task SetupHotKey()
+        {
+            _globalHookService.SetHook();
+            _globalHookService.AddKeyAction(Keys.G, TriggerGPT);
         }
 
         private async Task TriggerGPT(string copyMessage)
