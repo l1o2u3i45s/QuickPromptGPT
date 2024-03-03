@@ -11,11 +11,17 @@
         Title="MainWindow" Height="800" Width="1200" WindowState="Maximized">
     <Grid >
         <TabControl>
-            <TabItem Header="Main" >
+            <TabItem >
+                <TabItem.Header>
+                    <TextBlock Text="OpeAI" Foreground="Black"></TextBlock>
+                </TabItem.Header>
                 <userControl:ChatView_UC DataContext="{Binding ChatViewModel}"></userControl:ChatView_UC>
             </TabItem>
 
-            <TabItem Header="Settings" DataContext="{Binding SettingViewModel}">
+            <TabItem  DataContext="{Binding SettingViewModel}">
+                <TabItem.Header>
+                    <TextBlock Text="Setting" Foreground="Black"></TextBlock>
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>

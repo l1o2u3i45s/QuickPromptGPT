@@ -19,6 +19,12 @@
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBoxBase}">
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="Foreground" Value="#e0e0e0" />
+                <Setter Property="CaretBrush" Value="#e0e0e0" />
+            </Style>
+
+            <Style TargetType="ComboBoxItem" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
+                <Setter Property="Foreground" Value="#e0e0e0" />
+                <Setter Property="Background" Value="Black" />
             </Style>
 
 
