@@ -50,9 +50,9 @@
                                             </Trigger>
                                         </ControlTemplate.Triggers>
 
-                                        <Grid Margin="10,5,10,5">
-                                            <Border Name="Border">
-                                                <ContentPresenter />
+                                        <Grid>
+                                            <Border Name="Border" Margin="10,0">
+                                                <ContentPresenter Margin="10"/>
                                             </Border>
                                         </Grid>
                                     </ControlTemplate>
