@@ -42,6 +42,12 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListViewItem">
+                                        <Grid>
+                                            <Border Name="Border" Margin="10,0">
+                                                <ContentPresenter Margin="10"/>
+                                            </Border>
+                                        </Grid>
+
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="true">
                                                 <Setter TargetName="Border" Property="Background" Value="#8c8c8c" />
@@ -49,12 +55,6 @@
                                                 <Setter TargetName="Border" Property="CornerRadius" Value="10" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
-
-                                        <Grid>
-                                            <Border Name="Border" Margin="10,0">
-                                                <ContentPresenter Margin="10"/>
-                                            </Border>
-                                        </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

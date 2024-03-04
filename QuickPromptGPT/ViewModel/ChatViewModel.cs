@@ -100,10 +100,6 @@ namespace QuickPromptGPT.ViewModel
             {
                 response.TextContent += answer;
             }
-
-           
-
-          
         }
 
     }
