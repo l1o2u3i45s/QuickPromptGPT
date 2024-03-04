@@ -2,3 +2,4 @@
 - ApiKey 調整成settings.json
 - ChatView 對話改為MarkDown
 - ChatView 新增AI跟User
+- 新增上傳檔案功能
