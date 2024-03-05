@@ -10,7 +10,6 @@ namespace QuickPromptGPT
     {
         GPT3_5,
         GPT4,
-        DALL_E
     }
 
 

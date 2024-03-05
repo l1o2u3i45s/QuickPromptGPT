@@ -15,7 +15,7 @@ namespace QuickPromptGPT.ViewModel
 {
     public class ChatViewModel : ObservableObject
     {
-        private GPTModel _selectedModel;
+        private GPTModel _selectedModel = GPTModel.GPT4;
 
         public GPTModel SelectedModel
         {
@@ -92,6 +92,8 @@ namespace QuickPromptGPT.ViewModel
         {
           
             SelectedConversation.AppendMessage(_currentMessage.TextContent);
+            SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
+
             CurrentMessage.TextContent = "";
 
             DisplayChatMessage response = new DisplayChatMessage();

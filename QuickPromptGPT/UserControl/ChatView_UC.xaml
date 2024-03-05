@@ -69,8 +69,6 @@
                     <TextBlock Text="OpenAI " VerticalAlignment="Center" FontSize="20"></TextBlock>
                     <ComboBox SelectedValue="{Binding SelectedModel}" SelectedValuePath="Tag" VerticalAlignment="Center" Width="150" Margin="10">
                         <ComboBoxItem Content="GPT-4" Tag="{x:Static quickPromptGpt:GPTModel.GPT4}" />
-                        <ComboBoxItem Content="GPT-3.5" Tag="{x:Static quickPromptGpt:GPTModel.GPT3_5}" />
-                        <ComboBoxItem Content="DALL-E" Tag="{x:Static quickPromptGpt:GPTModel.DALL_E}" />
                     </ComboBox>
                 </StackPanel>
 
