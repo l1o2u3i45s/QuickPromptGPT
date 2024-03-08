@@ -78,7 +78,7 @@
                 <ItemsControl ItemsSource="{Binding SelectedConversation.ChatMessages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock FontSize="20" Margin="0,10" Text="{Binding TextContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock FontSize="20" Margin="10,10,80,10" TextWrapping="Wrap" Text="{Binding TextContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
