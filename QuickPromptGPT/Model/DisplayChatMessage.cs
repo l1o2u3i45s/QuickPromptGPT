@@ -20,6 +20,18 @@ namespace QuickPromptGPT.Model
             set => SetProperty(ref _textContent, value);
         }
 
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
+
+        public DisplayChatMessage(bool isGPT)
+        {
+            Name = isGPT ? "ChatGPT" : "您";
+        }
+
 
         public static implicit operator ChatMessage(DisplayChatMessage displayChatMessage)
         {
@@ -32,6 +44,8 @@ namespace QuickPromptGPT.Model
 
     public class DisplayConversation : ObservableObject
     {
+
+
         private string _id;
 
         public string ID
@@ -40,12 +54,12 @@ namespace QuickPromptGPT.Model
             set => SetProperty(ref _id, value);
         }
 
-        private string _name;
+        private string _summary;
 
-        public string Name
+        public string Summary
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _summary;
+            set => SetProperty(ref _summary, value);
         }
 
         private Conversation _currentConversation;
@@ -71,17 +85,18 @@ namespace QuickPromptGPT.Model
         public DisplayConversation(Conversation currentConversation)
         {
             CurrentConversation = currentConversation;
+
         }
 
 
-        public void AppendMessage(string message)
+        public void AppendMessage(string message, bool isGPT)
         {
             ChatMessage chat = new ChatMessage();
             chat.TextContent = message;
             _currentConversation.AppendMessage(chat);
 
 
-            ChatMessages.Add(new DisplayChatMessage()
+            ChatMessages.Add(new DisplayChatMessage(isGPT)
             {
                 TextContent = message
             });

@@ -23,7 +23,7 @@ namespace QuickPromptGPT.ViewModel
             set => SetProperty(ref _selectedModel, value);
         }
 
-        private DisplayChatMessage _currentMessage = new DisplayChatMessage();
+        private DisplayChatMessage _currentMessage = new DisplayChatMessage(false);
 
         public DisplayChatMessage CurrentMessage
         {
@@ -72,7 +72,7 @@ namespace QuickPromptGPT.ViewModel
             if (DisplayConversations.Any() == false)
             {
                 var newConversation = new DisplayConversation(await _gptService.CreateConversation(SelectedModel));
-                newConversation.Name = "New Conversation";
+                newConversation.Summary = "New Conversation";
                 DisplayConversations.Add(newConversation);
             }
 
@@ -82,7 +82,7 @@ namespace QuickPromptGPT.ViewModel
         private async Task AddConversation()
         {
             var newConversation = new DisplayConversation(await _gptService.CreateConversation(SelectedModel));
-            newConversation.Name = "New Conversation";
+            newConversation.Summary = "New Conversation";
             DisplayConversations.Add(newConversation);
             SelectedConversation = DisplayConversations.LastOrDefault();
         }
@@ -91,12 +91,12 @@ namespace QuickPromptGPT.ViewModel
         private async Task SendMessage()
         {
           
-            SelectedConversation.AppendMessage(_currentMessage.TextContent);
+            SelectedConversation.AppendMessage(_currentMessage.TextContent,false);
             SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
 
             CurrentMessage.TextContent = "";
 
-            DisplayChatMessage response = new DisplayChatMessage();
+            DisplayChatMessage response = new DisplayChatMessage(true);
             SelectedConversation.AppendMessage(response);
             await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
             {

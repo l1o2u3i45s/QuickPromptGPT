@@ -25,7 +25,7 @@ namespace QuickPromptGPT.ViewModel
             set => SetProperty(ref _chatMessages, value);
         }
 
-        private DisplayChatMessage _currentMessage = new DisplayChatMessage();
+        private DisplayChatMessage _currentMessage = new DisplayChatMessage(false);
 
         public DisplayChatMessage CurrentMessage
         {
@@ -45,13 +45,13 @@ namespace QuickPromptGPT.ViewModel
 
         public async Task SendGPT()
         {
-            ChatMessages.Add(new DisplayChatMessage()
+            ChatMessages.Add(new DisplayChatMessage(false)
             {
                 TextContent = _currentMessage.TextContent
             });
 
 
-            DisplayChatMessage reponse = new DisplayChatMessage();
+            DisplayChatMessage reponse = new DisplayChatMessage(false);
 
             ChatMessages.Add(reponse);
             //await foreach (var answer in  _gptService.Send(_currentMessage.TextContent))
