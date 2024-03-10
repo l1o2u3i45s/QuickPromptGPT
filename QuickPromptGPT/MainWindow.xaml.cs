@@ -25,5 +25,12 @@ namespace QuickPromptGPT
             InitializeComponent();
             DataContext = viewModel;
         }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
     }
 }
