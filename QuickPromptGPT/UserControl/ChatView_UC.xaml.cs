@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommunityToolkit.Mvvm.Messaging;
+using OpenAI_API.Chat;
+using QuickPromptGPT.Model.Messenge;
 
 namespace QuickPromptGPT.UserControl
 {
@@ -23,6 +26,15 @@ namespace QuickPromptGPT.UserControl
         public ChatView_UC()
         {
             InitializeComponent();
+            WeakReferenceMessenger.Default.Register<ChatViewScrollMessenge>(this, (r, m) =>
+            {
+
+                Dispatcher.Invoke(()=>
+                {
+                    ChatScrollViewer.ScrollToBottom();
+                });
+
+            });
         }
     }
 }

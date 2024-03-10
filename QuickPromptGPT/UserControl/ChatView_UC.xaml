@@ -74,7 +74,7 @@
 
             </Grid>
 
-            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="15,10">
+            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="15,10" x:Name="ChatScrollViewer">
                 <ItemsControl ItemsSource="{Binding SelectedConversation.ChatMessages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

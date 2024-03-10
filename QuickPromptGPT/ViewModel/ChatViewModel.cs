@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using OpenAI_API.Chat;
 using QuickPromptGPT.Model;
+using QuickPromptGPT.Model.Messenge;
 using QuickPromptGPT.Service;
 
 namespace QuickPromptGPT.ViewModel
@@ -93,7 +95,7 @@ namespace QuickPromptGPT.ViewModel
           
             SelectedConversation.AppendMessage(_currentMessage.TextContent,false);
             SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
-
+            WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
             CurrentMessage.TextContent = "";
 
             DisplayChatMessage response = new DisplayChatMessage(true);
@@ -101,6 +103,7 @@ namespace QuickPromptGPT.ViewModel
             await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
             {
                 response.TextContent += answer;
+                WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
             }
         }
 
