@@ -17,7 +17,7 @@ namespace QuickPromptGPT.ViewModel
 {
     public class ChatViewModel : ObservableObject
     {
-        private GPTModel _selectedModel = GPTModel.GPT4;
+        private GPTModel _selectedModel = GPTModel.GPT3_5;
 
         public GPTModel SelectedModel
         {

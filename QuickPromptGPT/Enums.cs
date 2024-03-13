@@ -10,6 +10,7 @@ namespace QuickPromptGPT
     {
         GPT3_5,
         GPT4,
+        GPT4_Turbo,
     }
 
 

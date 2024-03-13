@@ -15,6 +15,7 @@ namespace QuickPromptGPT
             {
                 GPTModel.GPT3_5 => OpenAI_API.Models.Model.DefaultChatModel,
                 GPTModel.GPT4 => OpenAI_API.Models.Model.GPT4,
+                GPTModel.GPT4_Turbo => OpenAI_API.Models.Model.GPT4_Turbo,
                 _ => throw new NotImplementedException()
             };
 
