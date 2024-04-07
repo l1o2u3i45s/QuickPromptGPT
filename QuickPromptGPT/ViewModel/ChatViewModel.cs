@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -42,23 +41,6 @@ namespace QuickPromptGPT.ViewModel
             set => SetProperty(ref _displayConversations, value);
         }
 
-        private ChatFileInfo _selectedChatFileInfo;
-
-        public ChatFileInfo SelectedChatFileInfo
-        {
-            get => _selectedChatFileInfo;
-            set => SetProperty(ref _selectedChatFileInfo, value);
-        }
-
-
-        private ObservableCollection<ChatFileInfo> _chatFiles = new ObservableCollection<ChatFileInfo>(){new ChatFileInfo()};
-
-        public ObservableCollection<ChatFileInfo> ChatFiles
-        {
-            get => _chatFiles;
-            set => SetProperty(ref _chatFiles, value);
-        }
-
         private DisplayConversation _selectedConversation;
 
         public DisplayConversation SelectedConversation
@@ -69,8 +51,6 @@ namespace QuickPromptGPT.ViewModel
 
         public ICommand SendMessageCommand { get; set; }
         public ICommand AddConversationCommand { get; set; }
-        public ICommand AddFileCommand { get; set; }
-        public ICommand DeleteFileCommand { get; set; }
 
         private readonly IGPTService _gptService;
         private readonly IConversationService _conversationService;
@@ -84,27 +64,6 @@ namespace QuickPromptGPT.ViewModel
 
             SendMessageCommand = new AsyncRelayCommand(SendMessage);
             AddConversationCommand = new AsyncRelayCommand(AddConversation);
-            AddFileCommand = new AsyncRelayCommand(AddFile);
-            DeleteFileCommand = new AsyncRelayCommand(DeleteFile);
-        }
-
-        private async Task DeleteFile()
-        {
-            ChatFiles.Remove(SelectedChatFileInfo);
-            SelectedChatFileInfo = ChatFiles.LastOrDefault();
-        }
-
-        private async Task AddFile()
-        {
-            FileDialog fileDialog = new OpenFileDialog();
-            fileDialog.ShowDialog();
-
-            if (string.IsNullOrEmpty(fileDialog.FileName) == false)
-            {
-                SelectedChatFileInfo.IsSelectedFile = true;
-                SelectedChatFileInfo.FilePath = fileDialog.FileName;
-                ChatFiles.Add(new ChatFileInfo() {});
-            }
         }
 
         private async Task InitData()
@@ -130,11 +89,11 @@ namespace QuickPromptGPT.ViewModel
             SelectedConversation = DisplayConversations.LastOrDefault();
         }
 
-
+      
         private async Task SendMessage()
         {
-
-            SelectedConversation.AppendMessage(_currentMessage.TextContent, false);
+          
+            SelectedConversation.AppendMessage(_currentMessage.TextContent,false);
             SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
             WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
             CurrentMessage.TextContent = "";
@@ -147,8 +106,6 @@ namespace QuickPromptGPT.ViewModel
                 WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
             }
         }
-
-
 
     }
 
