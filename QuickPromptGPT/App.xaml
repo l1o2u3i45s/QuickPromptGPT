@@ -7,6 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="GptChatViewBackground" Color="#212121" />
             <SolidColorBrush x:Key="GptChatViewListBackground" Color="#171717" />
@@ -15,23 +17,15 @@
                 <Setter Property="Foreground" Value="#e0e0e0" />
             </Style>
 
-            <Style TargetType="TextBox" >
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBoxBase}">
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="Foreground" Value="#e0e0e0" />
                 <Setter Property="CaretBrush" Value="#e0e0e0" />
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="BorderBrush" Value="Transparent"></Setter>
             </Style>
 
-            <Style TargetType="ComboBoxItem" >
+            <Style TargetType="ComboBoxItem" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
                 <Setter Property="Foreground" Value="#e0e0e0" />
                 <Setter Property="Background" Value="Black" />
-            </Style>
-
-            <Style TargetType="Button">
-                <Setter Property="Foreground" Value="#e0e0e0" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderBrush" Value="Transparent"></Setter>
             </Style>
 
 
