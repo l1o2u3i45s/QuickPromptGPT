@@ -135,6 +135,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Model\DisplayChatMessage.cs" />
+    <Compile Include="Model\ChatFileInfo.cs" />
     <Compile Include="Model\Messenge\Messenges.cs" />
     <Compile Include="Service\ConversationService.cs" />
     <Compile Include="Service\GPTService.cs" />
