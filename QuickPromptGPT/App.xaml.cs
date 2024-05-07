@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using OpenAI_API;
+using QuickPromptGPT.Model;
 using QuickPromptGPT.Service;
 using QuickPromptGPT.ViewModel;
 using QuickPromptGPT.Windows;
@@ -42,7 +43,8 @@ namespace QuickPromptGPT
             services.AddSingleton<GlobalHookService>();
             services.AddSingleton<IGPTService, GPTService>();
             services.AddSingleton<IConversationService,ConversationService>();
-
+            services.AddSingleton<CacheData>();
+            services.AddSingleton<CacheService>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

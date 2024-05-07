@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using QuickPromptGPT.Service;
 using QuickPromptGPT.Windows;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace QuickPromptGPT.ViewModel
 {
-    public class SettingViewModel : ObservableObject
+    public partial class SettingViewModel : ObservableObject
     {
         public ICommand ApplyCommand => new AsyncRelayCommand(ApplyAction);
         public ICommand ReleaseCommand => new AsyncRelayCommand(ReleaseAction);
 
+        public ICommand SaveCommand => new AsyncRelayCommand(Save);
+
         private readonly GlobalHookService _globalHookService;
+        private readonly CacheService _cacheService;
         private readonly IGPTService _gptService;
 
         private readonly GPTChatWindow _gptChatWindow;
         private readonly GPTChatWindowViewModel _gptChatWindowViewModel;
 
 
-        private string _tokenKey = "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";
+        private string _tokenKey ;
 
         public string TokenKey
         {
@@ -36,11 +35,15 @@ namespace QuickPromptGPT.ViewModel
             }
         }
 
+        
+
         public SettingViewModel(GlobalHookService globalHookService, IGPTService gptService,
-       GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel)
+       GPTChatWindow gptChatWindow, GPTChatWindowViewModel gptChatWindowViewModel, CacheService cacheService)
         {
             _globalHookService = globalHookService;
             _gptService = gptService;
+            _cacheService = cacheService;
+            TokenKey = _cacheService.GetKey();
 
 
             _ = SetupHotKey();
@@ -48,6 +51,13 @@ namespace QuickPromptGPT.ViewModel
 
             _gptChatWindow = gptChatWindow;
             _gptChatWindowViewModel = gptChatWindowViewModel;
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            _cacheService.SetKey(_tokenKey);
+            _cacheService.Save();
         }
 
         private async Task ApplyAction()
