@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -92,19 +93,26 @@ namespace QuickPromptGPT.ViewModel
       
         private async Task SendMessage()
         {
-          
-            SelectedConversation.AppendMessage(_currentMessage.TextContent,false);
-            SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
-            WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
-            CurrentMessage.TextContent = "";
-
-            DisplayChatMessage response = new DisplayChatMessage(true);
-            SelectedConversation.AppendMessage(response);
-            await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
+            try
             {
-                response.TextContent += answer;
+                SelectedConversation.AppendMessage(_currentMessage.TextContent, false);
+                SelectedConversation.CurrentConversation.Model = SelectedModel.ToOpenAIModel();
                 WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
+                CurrentMessage.TextContent = "";
+
+                DisplayChatMessage response = new DisplayChatMessage(true);
+                SelectedConversation.AppendMessage(response);
+                await foreach (var answer in _gptService.Send(SelectedConversation.CurrentConversation))
+                {
+                    response.TextContent += answer;
+                    WeakReferenceMessenger.Default.Send(new ChatViewScrollMessenge());
+                }
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        
         }
 
     }
